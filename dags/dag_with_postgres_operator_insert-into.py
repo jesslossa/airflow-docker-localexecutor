@@ -14,8 +14,8 @@ default_args = {
 with DAG(
     dag_id='dag_with_postgres_operator_insert-into',
     default_args=default_args,
-    start_date=datetime(2021, 12, 19),
-    schedule_interval='0 0 * * *'
+    start_date=(datetime.today() - timedelta(days=2)),
+    schedule='0 0 * * *'
 ) as dag:
     task1 = PostgresOperator(
         task_id='create_postgres_table',
@@ -37,4 +37,11 @@ with DAG(
         """
     )
 
-    task1 >> task2
+    task3 = PostgresOperator(
+        task_id='delete_data_from_table',
+        postgres_conn_id='postgres_localhost',
+        sql="""
+            delete from dag_runs where dt = '{{ ds }}' and dag_id = '{{ dag.dag_id }}';
+        """
+    )
+    task1 >> task3 >> task2
