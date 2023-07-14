@@ -1436,4 +1436,10 @@ LABEL org.apache.airflow.distro="debian" \
 ENTRYPOINT ["/usr/bin/dumb-init", "--", "/entrypoint"]
 
 ADD airflow/webserver_config.py /home/airflow
+
+FROM apache/airflow:2.6.3
+COPY requirements.txt /requirements.txt
+RUN pip install --user --upgrade pip
+RUN pip install --no-cache-dir --user -r /requirements.txt
+
 CMD []
