@@ -23,8 +23,8 @@ with DAG(
     default_args=default_args,
     dag_id='dag_with_python_operator_parameters-xcom_test',
     description='Dag with parameters - v1',
-    start_date=datetime(2023, 7, 12),
-    schedule_interval='@daily'
+    start_date=(datetime.today() - timedelta(days=2)),
+    schedule='@daily'
 ) as dag:
     task1 = PythonOperator(
         task_id='greet',

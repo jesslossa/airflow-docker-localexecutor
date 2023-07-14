@@ -12,8 +12,8 @@ default_args = {
 @dag(dag_id='first-last-name_dag_with_taskflow_api', 
      description='First and last name dag using taskflow api',
      default_args=default_args, 
-     start_date=datetime(2023, 7, 12), 
-     schedule_interval='@daily')
+     start_date=(datetime.today() - timedelta(days=2)),
+     schedule='@daily')
 def hello_world_etl():
 
     @task(multiple_outputs=True)

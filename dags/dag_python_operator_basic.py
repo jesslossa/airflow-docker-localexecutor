@@ -18,8 +18,8 @@ with DAG(
     default_args=default_args,
     dag_id='dag_python_operator_basic',
     description='Basic dag using PythonOperator',
-    start_date=datetime(2023, 7, 10),
-    schedule_interval='@daily'
+    start_date=(datetime.today() - timedelta(days=2)),
+    schedule='@daily'
 ) as dag:
     task1 = PythonOperator(
         task_id='greet',
