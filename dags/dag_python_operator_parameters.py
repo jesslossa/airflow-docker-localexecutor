@@ -20,7 +20,7 @@ def get_name():
 
 with DAG(
     default_args=default_args,
-    dag_id='dag_python_operator_parameters',
+    dag_id='dag_with_python_operator_parameters',
     description='Dag with parameters - v1',
     start_date=datetime(2023, 7, 12),
     schedule_interval='@daily'

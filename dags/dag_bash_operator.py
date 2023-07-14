@@ -12,7 +12,7 @@ default_args = {
 
 
 with DAG(
-    dag_id='our_first_dag',
+    dag_id='dag_basic_bash_operator',
     default_args=default_args,
     description='This is the first dag',
     start_date=datetime(2023, 7, 10, 2),
