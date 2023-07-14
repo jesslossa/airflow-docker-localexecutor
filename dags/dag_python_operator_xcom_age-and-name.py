@@ -44,7 +44,7 @@ with DAG(
     )
 
     task3 = PythonOperator(
-        task='get_age',
+        task_id='get_age',
         python_callable=get_age
     )
 
