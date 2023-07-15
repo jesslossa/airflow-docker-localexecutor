@@ -59,6 +59,12 @@ ARG AIRFLOW_VERSION_SPECIFICATION=""
 # By default PIP has progress bar but you can disable it.
 ARG PIP_PROGRESS_BAR="on"
 
+FROM apache/airflow:2.6.3
+COPY requirements.txt /requirements.txt
+RUN pip install --user --upgrade pip
+RUN pip install --no-cache-dir --user -r /requirements.txt
+
+
 ##############################################################################################
 # This is the script image where we keep all inlined bash scripts needed in other segments
 ##############################################################################################
@@ -1436,10 +1442,5 @@ LABEL org.apache.airflow.distro="debian" \
 ENTRYPOINT ["/usr/bin/dumb-init", "--", "/entrypoint"]
 
 ADD airflow/webserver_config.py /home/airflow
-
-FROM apache/airflow:2.6.3
-COPY requirements.txt /requirements.txt
-RUN pip install --user --upgrade pip
-RUN pip install --no-cache-dir --user -r /requirements.txt
 
 CMD []
